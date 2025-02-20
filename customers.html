@@ -22,12 +22,10 @@
 
 <div class="container">
 
-    <!-- Create Customer Form -->
+    <!-- Create/Edit Customer Form -->
     <section id="create-customer">
-        <button onclick="openForm()">Create New Customer</button>
-
-        <div id="customerForm" class="form-container">
-            <h2>New Customer</h2>
+        <div id="customerForm" class="form-container" style="display: none;">
+            <h2 id="formTitle">New Customer</h2>
             <form id="createCustomerForm">
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>
@@ -44,7 +42,9 @@
                 <label for="phone">Phone:</label>
                 <input type="text" id="phone" name="phone">
 
-                <button type="submit">Submit</button>
+                <input type="hidden" id="customerId" name="customerId"> <!-- Hidden field to store Customer ID -->
+
+                <button type="submit" id="submitButton">Submit</button>
             </form>
             <button onclick="closeForm()">Cancel</button>
         </div>
@@ -62,6 +62,7 @@
                     <th>Last Name</th>
                     <th>Address</th>
                     <th>Phone</th>
+                    <th>Actions</th> <!-- New column for edit buttons -->
                 </tr>
             </thead>
             <tbody>
@@ -73,6 +74,7 @@
                     <td>Doe</td>
                     <td>123 Elm Street</td>
                     <td>555-1234</td>
+                    <td><button onclick="editCustomer(this)">Edit</button></td> <!-- Edit button -->
                 </tr>
                 <tr>
                     <td>2</td>
@@ -81,6 +83,7 @@
                     <td>Smith</td>
                     <td>456 Oak Avenue</td>
                     <td>555-5678</td>
+                    <td><button onclick="editCustomer(this)">Edit</button></td> <!-- Edit button -->
                 </tr>
             </tbody>
         </table>
@@ -89,7 +92,9 @@
 </div>
 
 <script>
-    // Open the form to create a new customer
+    let isEditMode = false;
+
+    // Open the form to create or edit a customer
     function openForm() {
         document.getElementById("customerForm").style.display = "block";
     }
@@ -97,14 +102,54 @@
     // Close the form without saving
     function closeForm() {
         document.getElementById("customerForm").style.display = "none";
+        clearForm(); // Clear the form when closing
     }
 
-    // Handle form submission (dummy function for now)
+    // Clear form fields
+    function clearForm() {
+        document.getElementById("createCustomerForm").reset();
+        document.getElementById("customerId").value = "";
+        document.getElementById("formTitle").textContent = "New Customer";
+        document.getElementById("submitButton").textContent = "Submit";
+        isEditMode = false;
+    }
+
+    // Handle form submission
     document.getElementById("createCustomerForm").addEventListener("submit", function(event) {
         event.preventDefault(); // Prevent the form from submitting the traditional way
-        alert("New customer created!"); // Placeholder action
-        closeForm(); // Close the form
+
+        if (isEditMode) {
+            alert("Customer updated!");
+        } else {
+            alert("New customer created!");
+        }
+
+        closeForm(); // Close the form after submission
     });
+
+    // Edit an existing customer
+    function editCustomer(button) {
+        const row = button.parentElement.parentElement;
+        const cells = row.getElementsByTagName("td");
+
+        // Populate the form with the customer's data
+        document.getElementById("customerId").value = cells[0].innerText;
+        document.getElementById("email").value = cells[1].innerText;
+        document.getElementById("first_name").value = cells[2].innerText;
+        document.getElementById("last_name").value = cells[3].innerText;
+        document.getElementById("address").value = cells[4].innerText;
+        document.getElementById("phone").value = cells[5].innerText;
+
+        // Update form title and button text
+        document.getElementById("formTitle").textContent = "Edit Customer";
+        document.getElementById("submitButton").textContent = "Save Changes";
+
+        // Set edit mode to true
+        isEditMode = true;
+
+        // Show the form
+        openForm();
+    }
 </script>
 
 </body>
