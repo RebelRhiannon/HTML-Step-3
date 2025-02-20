@@ -31,10 +31,18 @@
             <input type="number" id="order_total" name="order_total" step="0.01" required>
 
             <label for="customer_id">Customer ID:</label>
-            <input type="number" id="customer_id" name="customer_id" required>
+            <select id="customer_id" name="customer_id" required>
+                <option value="1">1 - John Doe</option>
+                <option value="2">2 - Jane Smith</option>
+                <option value="3">3 - Michael Johnson</option>
+            </select>
 
             <label for="sales_rep_id">Sales Rep ID:</label>
-            <input type="number" id="sales_rep_id" name="sales_rep_id" required>
+            <select id="sales_rep_id" name="sales_rep_id" required>
+                <option value="101">101 - Sarah Miller</option>
+                <option value="102">102 - David Brown</option>
+                <option value="103">103 - Emily Davis</option>
+            </select>
 
             <button type="submit">Submit</button>
         </form>
@@ -48,8 +56,8 @@
                 <th>Order ID</th>
                 <th>Order Date</th>
                 <th>Order Total</th>
-                <th>Customer ID</th>
-                <th>Sales Rep ID</th>
+                <th>Customer</th>
+                <th>Sales Rep</th>
             </tr>
         </thead>
         <tbody>
@@ -59,28 +67,24 @@
 </div>
 
 <script>
-    let orderCount = 1; // Counter for Order ID generation
+    let orderCount = 1;
 
-    // Open the form to create a new Order
     function openForm() {
         document.getElementById("orderForm").style.display = "block";
     }
 
-    // Close the form without saving
     function closeForm() {
         document.getElementById("orderForm").style.display = "none";
     }
 
-    // Handle form submission
     document.getElementById("createOrderForm").addEventListener("submit", function(event) {
-        event.preventDefault(); // Prevent the form from submitting traditionally
+        event.preventDefault();
 
         const order_date = document.getElementById("order_date").value;
         const order_total = document.getElementById("order_total").value;
-        const customer_id = document.getElementById("customer_id").value;
-        const sales_rep_id = document.getElementById("sales_rep_id").value;
+        const customer_id = document.getElementById("customer_id").selectedOptions[0].text;
+        const sales_rep_id = document.getElementById("sales_rep_id").selectedOptions[0].text;
 
-        // Adding a new row to the orders table
         const table = document.getElementById("orderTable").getElementsByTagName('tbody')[0];
         const newRow = table.insertRow();
         newRow.innerHTML = `
@@ -91,10 +95,9 @@
             <td>${sales_rep_id}</td>
         `;
 
-        orderCount++; // Increment Order ID for the next order
-
+        orderCount++;
         alert("New Order Created!");
-        closeForm(); // Close the form
+        closeForm();
     });
 </script>
 
