@@ -1,0 +1,161 @@
+<!-- customers.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Customer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #444;
+            overflow: hidden;
+        }
+
+        nav a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .container {
+            margin: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        button {
+            padding: 8px 16px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        /* Form styling */
+        .form-container {
+            display: none;
+            margin: 20px;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container input, .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-container button {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Create Customer</h1>
+</header>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="sales_reps.html">Sales Representatives</a>
+    <a href="orders.html">Orders</a>
+    <a href="order_details.html">Order Details</a>
+    <a href="products.html">Products</a>
+    <a href="inventory.html">Inventory</a>
+    <a href="order_products.html">Orders & Products</a>
+</nav>
+
+<div class="container">
+    <button onclick="openForm()">Create New Customer</button>
+
+    <div id="customerForm" class="form-container">
+        <h2>New Customer</h2>
+        <form id="createCustomerForm">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="first_name">First Name:</label>
+            <input type="text" id="first_name" name="first_name" required>
+
+            <label for="last_name">Last Name:</label>
+            <input type="text" id="last_name" name="last_name" required>
+
+            <label for="address">Address:</label>
+            <textarea id="address" name="address" required></textarea>
+
+            <label for="phone">Phone:</label>
+            <input type="text" id="phone" name="phone">
+
+            <button type="submit">Submit</button>
+        </form>
+        <button onclick="closeForm()">Cancel</button>
+    </div>
+</div>
+
+<script>
+    // Open the form to create a new customer
+    function openForm() {
+        document.getElementById("customerForm").style.display = "block";
+    }
+
+    // Close the form without saving
+    function closeForm() {
+        document.getElementById("customerForm").style.display = "none";
+    }
+
+    // Handle form submission (dummy function for now)
+    document.getElementById("createCustomerForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent the form from submitting the traditional way
+        alert("New customer created!"); // Placeholder action
+        closeForm(); // Close the form
+    });
+</script>
+
+</body>
+</html>

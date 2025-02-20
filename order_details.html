@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Details</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Order Details</h1>
+        <p>Manage order details, including products in each order, quantities, and prices.</p>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="customers.html">Customers</a></li>
+            <li><a href="sales_reps.html">Sales Reps</a></li>
+            <li><a href="orders.html">Orders</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="order_details.html">Order Details</a></li>
+        </ul>
+    </nav>
+
+    <section>
+        <!-- Order Details Table -->
+        <h2>Order Details Table</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Order Details ID</th>
+                    <th>Order ID</th>
+                    <th>Product ID</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th>Line Total</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Sample order details data (to be dynamically generated with backend data) -->
+                <tr>
+                    <td>1</td>
+                    <td>1001</td>
+                    <td>2001</td>
+                    <td>5</td>
+                    <td>$20.00</td>
+                    <td>$100.00</td>
+                    <td>
+                        <a href="edit_order_details.html?id=1">Edit</a> |
+                        <a href="delete_order_details.html?id=1" onclick="return confirm('Are you sure you want to delete this?')">Delete</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>1002</td>
+                    <td>2003</td>
+                    <td>3</td>
+                    <td>$15.00</td>
+                    <td>$45.00</td>
+                    <td>
+                        <a href="edit_order_details.html?id=2">Edit</a> |
+                        <a href="delete_order_details.html?id=2" onclick="return confirm('Are you sure you want to delete this?')">Delete</a>
+                    </td>
+                </tr>
+                <!-- More rows will be dynamically loaded here from the database -->
+            </tbody>
+        </table>
+    </section>
+
+    <section>
+        <!-- Create New Order Detail Form -->
+        <h2>Create New Order Detail</h2>
+        <form action="create_order_detail.php" method="POST">
+            <label for="order_id">Order ID:</label>
+            <input type="number" id="order_id" name="order_id" required><br><br>
+
+            <label for="product_id">Product ID:</label>
+            <input type="number" id="product_id" name="product_id" required><br><br>
+
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" required><br><br>
+
+            <label for="unit_price">Unit Price:</label>
+            <input type="text" id="unit_price" name="unit_price" required><br><br>
+
+            <label for="line_total">Line Total:</label>
+            <input type="text" id="line_total" name="line_total" required readonly><br><br>
+
+            <button type="submit">Create Order Detail</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Your Company Name</p>
+    </footer>
+
+    <script>
+        // JavaScript to calculate line total dynamically based on quantity and unit price
+        document.getElementById('quantity').addEventListener('input', updateLineTotal);
+        document.getElementById('unit_price').addEventListener('input', updateLineTotal);
+
+        function updateLineTotal() {
+            const quantity = document.getElementById('quantity').value;
+            const unitPrice = document.getElementById('unit_price').value;
+            const lineTotalField = document.getElementById('line_total');
+
+            if (quantity && unitPrice) {
+                lineTotalField.value = (quantity * unitPrice).toFixed(2);
+            } else {
+                lineTotalField.value = '';
+            }
+        }
+    </script>
+</body>
+</html>
