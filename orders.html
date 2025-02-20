@@ -47,6 +47,7 @@
     <table id="orderTable">
         <thead>
             <tr>
+                <th>Order ID</th>
                 <th>Order Date</th>
                 <th>Order Total</th>
                 <th>Customer ID</th>
@@ -60,6 +61,8 @@
 </div>
 
 <script>
+    let orderCount = 1; // Counter for Order ID generation
+
     // Open the form to create a new Order
     function openForm() {
         document.getElementById("orderForm").style.display = "block";
@@ -83,11 +86,14 @@
         const table = document.getElementById("orderTable").getElementsByTagName('tbody')[0];
         const newRow = table.insertRow();
         newRow.innerHTML = `
+            <td>${orderCount}</td>
             <td>${order_date}</td>
             <td>${order_total}</td>
             <td>${customer_id}</td>
             <td>${sales_rep_id}</td>
         `;
+
+        orderCount++; // Increment Order ID for the next order
 
         alert("New Order Created!");
         closeForm(); // Close the form
