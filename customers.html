@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customers</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link to external stylesheet -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -53,6 +53,7 @@
     <!-- View Customers Table -->
     <section id="view-customers">
         <h2>Customer List</h2>
+        <button onclick="addCustomer()">Add Customer</button> <!-- ✅ New Add Customer Button -->
         <table>
             <thead>
                 <tr>
@@ -62,11 +63,10 @@
                     <th>Last Name</th>
                     <th>Address</th>
                     <th>Phone</th>
-                    <th>Actions</th> <!-- New column for edit buttons -->
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- Sample customer data (You will dynamically load this from your backend) -->
                 <tr>
                     <td>1</td>
                     <td>customer1@example.com</td>
@@ -74,7 +74,7 @@
                     <td>Doe</td>
                     <td>123 Elm Street</td>
                     <td>555-1234</td>
-                    <td><button onclick="editCustomer(this)">Edit</button></td> <!-- Edit button -->
+                    <td><button onclick="editCustomer(this)">Edit</button></td>
                 </tr>
                 <tr>
                     <td>2</td>
@@ -83,7 +83,7 @@
                     <td>Smith</td>
                     <td>456 Oak Avenue</td>
                     <td>555-5678</td>
-                    <td><button onclick="editCustomer(this)">Edit</button></td> <!-- Edit button -->
+                    <td><button onclick="editCustomer(this)">Edit</button></td>
                 </tr>
             </tbody>
         </table>
@@ -112,6 +112,12 @@
         document.getElementById("formTitle").textContent = "New Customer";
         document.getElementById("submitButton").textContent = "Submit";
         isEditMode = false;
+    }
+
+    // ✅ Open form for adding a new customer
+    function addCustomer() {
+        clearForm(); // Reset form to clear any previous data
+        openForm();
     }
 
     // Handle form submission
